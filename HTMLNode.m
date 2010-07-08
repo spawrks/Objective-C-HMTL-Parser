@@ -376,12 +376,12 @@ NSString * allNodeContents(xmlNode*node)
 	return allNodeContents(_node);
 }
 
-NSString * rawContentsOfNode(xmlNode * node, htmlDocPtr doc)
+NSString * rawContentsOfNode(xmlNode * node)
 {	
 	xmlBufferPtr buffer = xmlBufferCreateSize(1000);
 	xmlOutputBufferPtr buf = xmlOutputBufferCreateBuffer(buffer, NULL);
 	
-	htmlNodeDumpFormatOutput(buf, doc, node, NULL);
+	hxmlNodeDumpOutput(buf, node->doc, node, 3, 0, NULL);
 	
 	xmlOutputBufferFlush(buf);
 		
@@ -452,7 +452,7 @@ NSString * rawContentsOfNode(xmlNode * node, htmlDocPtr doc)
 }
 
 -(NSString*)rawContents {
-	return nil;// rawContentsOfNode(_node, _parser->_doc);
+	rawContentsOfNode(_node);
 }
 
 @end
